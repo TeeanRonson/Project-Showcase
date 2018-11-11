@@ -3,16 +3,12 @@
 ### Routes  
  
  * ## Authentication  
+  
   * [Register](#register)  
   * [Login](#login)
   * [Find](#find)
   * [User](#user)
 
-
-
-
-* Test
-    * [Make a Transaction](#make-a-transaction) (new)
 
 ### Logics
 
