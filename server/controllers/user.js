@@ -6,7 +6,10 @@ const emailVerification = require('../helpers/emailVerification');
 const md5 = require('md5');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const axios = require('axios')
+const axios = require('axios');
+const linkedinConfig = require('../config/linkedin.json')
+
+const Linkedin = require('node-linkedin')(linkedinConfig.app_id, linkedinConfig.secret, linkedinConfig.callback)
 
 
 createAccountHelper = (req, res) => {
@@ -43,7 +46,7 @@ createAccountHelper = (req, res) => {
         .catch(err => res.status(403).send({
             error: err
         }));
-},
+    },
 
     loginHelper = (user, req, res) => {
         if (!user)
@@ -158,5 +161,11 @@ module.exports = {
         } else {
             res.status(400).send({ err: "No id param. "});
         }
+    },
+
+    linkedin(req, res) {
+        Linkedin.people.url('', (err, out) => {
+            console.log(out)
+        })
     }
 }

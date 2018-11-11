@@ -18,4 +18,5 @@ module.exports = (app) => {
   
   //Users' github repo
   app.get('/user', usersController.user);
+  app.get('/linkedin', usersController.linkedin)
 }
