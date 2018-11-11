@@ -1,8 +1,6 @@
 # API Documentation
 
-### Routes  
- 
- * ## Authentication  
+### APIs  
   
   * [Register](#register)  
   * [Login](#login)
