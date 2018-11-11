@@ -6,6 +6,7 @@ const emailVerification = require('../helpers/emailVerification');
 const md5 = require('md5');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const axios = require('axios')
 
 
 createAccountHelper = (req, res) => {
@@ -28,7 +29,14 @@ createAccountHelper = (req, res) => {
                 password: md5(req.body.password),
             }, secret, { expiresIn: '24h' });
             res.status(201).send({
-                user: user,
+                user: {
+                    email: req.body.email,
+                    username: req.body.username,
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    github: req.body.github,
+                    linkedin: req.body.linkedin, 
+                },
                 jwttoken: jwttoken
             })
         })
@@ -51,7 +59,14 @@ createAccountHelper = (req, res) => {
 
             }, secret, { expiresIn: '24h' });
             return res.status(200).send({
-                user: user,
+                user: {
+                    email: user.email,
+                    username: user.username,
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    github: user.github,
+                    linkedin: user.linkedin, 
+                },
                 jwttoken: jwttoken
             });
         }
@@ -84,14 +99,64 @@ module.exports = {
             })
             .catch((err) => res.status(404).send({ error: err }))
     },
-    
+
     login(req, res) {
         if (req.body.username) {
             User.findOne({ where: { [Op.or]: [{ email: req.body.username }, { username: req.body.username }] } })
                 .then((user) => loginHelper(user, req, res))
-                .catch(err => res.status(200).send(err));
+                .catch(err => res.status(200).send({err: err}));
         } else {
             res.status(404).send({ err: 'There is no such username' })
+        }
+    },
+
+    find(req, res) {
+        console.log("find request");
+        const username = req.query.username;
+        if (username) {
+            console.log(username)
+            User.findOne({ username: username})
+            .then(user => {
+                return res.status(200).send({
+                    username: user.username,
+                    id: user.id,
+                    github: user.github
+                })
+            })
+            .catch(err => res.status(404).send({err: err}));
+        } else {
+            res.status(400).send({ err: "No username param. "});
+        }
+    },
+
+    user(req, res) {
+        console.log("/user");
+        const id = req.query.id;
+        if (id) {
+            console.log('id = ' + id)
+            User.findById(id)
+            .then(user => {
+                console.log("github: " + user.github)
+                if (!user.github)
+                    return res.status(404).send({err: "Repos not found"})
+                axios.get(`https://api.github.com/users/${user.github}/repos`)
+                .then(response => {
+                    console.log(response)
+                    return res.status(200).send({
+                        username: user.username,
+                        id: user.id,
+                        repos: response.data
+                    })
+                }) 
+                .catch(err => {
+                    res.status(400).send({err: "Fetch from gethub error: " + err})
+                })
+            })
+            .catch(err => {
+                res.status(404).send({err: err || 'user not found'})
+            });
+        } else {
+            res.status(400).send({ err: "No id param. "});
         }
     }
 }

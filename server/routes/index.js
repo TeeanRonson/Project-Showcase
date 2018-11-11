@@ -8,12 +8,14 @@ module.exports = (app) => {
   }));
 
   //Use middleware
-  app.use('/user', jwtCheck);
+  app.use('/auth', jwtCheck);
   app.use('/register', formatChecker.registerChecker);
-  app.use('/verify/register', formatChecker.registerChecker);
-  app.use('/adminregister', formatChecker.registerChecker);
 
    //Users' routes:
   app.post('/register', usersController.createAccount);
   app.post('/login', usersController.login);
+  app.get('/find', usersController.find);
+  
+  //Users' github repo
+  app.get('/user', usersController.user);
 }

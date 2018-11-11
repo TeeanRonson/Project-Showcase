@@ -38,12 +38,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
   });
-  User.associate = function(models) {
-    // associations can be defined here
-    User.hasMany(models.Repo, {
-      foreignKey: 'userId',
-      as: 'repo',
-    })
-  };
+  // User.associate = function(models) {
+  //   // associations can be defined here
+  //   User.hasMany(models.Repo, {
+  //     foreignKey: 'userId',
+  //     as: 'repo',
+  //   })
+  // };
   return User;
 };
