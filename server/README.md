@@ -2,10 +2,11 @@
 
 ### Routes  
  
- * Authentication  
+ * ## Authentication  
   * [Register](#register)  
-	* [Register with email verification](#register-with-email-verification)
-	* [Login](#login)
+  * [Login](#login)
+  * [Find](#find)
+  * [User](#user)
 
 
 
@@ -205,7 +206,7 @@
             "default_branch": "master"
         },
         { 
-            
+
         }
         ]
     }
