@@ -11,6 +11,7 @@
 ### Logics
 
 [Authorization](#authorization)  
+[Issues](#issue)
 
 
 * # Register
@@ -207,3 +208,7 @@
 * # Authorization
 
     * Every route start with baseURL/user/ will check the token sent by a client, and the server will recognize the token and know which user you are. If you update your email, username or password, the token will expire. Also, the token will expire after it was generated 24h.
+
+* # Issues
+    
+    * For linkedin Auth 2.0, where to store user's token

@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       unique: true
     },
+    
   });
   return Linkedin;
 };
