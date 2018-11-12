@@ -17,18 +17,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      fork: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
-      stargazers_count: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      language: {
-        allowNull: false,
-        type: Sequelize.STRING
-      }
     });
   },
   down: (queryInterface, Sequelize) => {

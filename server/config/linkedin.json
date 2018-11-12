@@ -1,5 +1,5 @@
 {
   "app_id": "86g4me4vprq5yo",
   "secret": "N1dRoIob0jYrzZ1j",
-  "callbcak": "https://github.com/PerrySong"
+  "callbcak": "http://localhost:8000/find"
 }

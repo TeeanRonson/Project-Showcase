@@ -29,21 +29,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    github: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    linkedin: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
   });
-  // User.associate = function(models) {
-  //   // associations can be defined here
-  //   User.hasMany(models.Repo, {
-  //     foreignKey: 'userId',
-  //     as: 'repo',
-  //   })
-  // };
+  User.associate = function(models) {
+    // associations can be defined here
+    User.hasOne(models.Github, {
+      foreignKey: 'userId',
+      as: 'github',
+    })
+    User.hasOne(models.Linkedin, {
+      foreignKey: 'userId',
+      as: 'linkedin',// Now I will get User.getProfile and User.setProfile
+    })
+  };
   return User;
 };

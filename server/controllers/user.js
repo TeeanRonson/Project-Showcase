@@ -2,14 +2,12 @@ const User = require('../models').User;
 const jwt = require('jsonwebtoken');
 const secret = require('../config').secret;
 const uniqid = require('uniqid');
-const emailVerification = require('../helpers/emailVerification');
 const md5 = require('md5');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const axios = require('axios');
 const linkedinConfig = require('../config/linkedin.json')
 
-const Linkedin = require('node-linkedin')(linkedinConfig.app_id, linkedinConfig.secret, linkedinConfig.callback)
 
 
 createAccountHelper = (req, res) => {
@@ -164,8 +162,19 @@ module.exports = {
     },
 
     linkedin(req, res) {
-        Linkedin.people.url('', (err, out) => {
-            console.log(out)
+        axios.get("https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=86g4me4vprq5yo&redirect_uri=https%3A%2F%2Fwww.google.com&state=987654321&scope=r_basicprofile")
+        .then(response => {
+            console.log(response.data)
+            res.status(200).send(response.data);
         })
+        .catch(err => {
+            res.status(400).send({err: "Fetch from linkedin error: " + err})
+        })
+    },
+
+    linkedinAuth (req, res) {
+        console.log(req.query.code);
+        res.status(200).send('Hi')
     }
+
 }

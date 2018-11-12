@@ -1,7 +1,7 @@
 'use strict'
 //This table indicate the coin's type and amount a user currently hold 
 module.exports = (sequelize, DataTypes) => {
-  var Repo = sequelize.define('Repo', {
+  var Github = sequelize.define('Github', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -15,22 +15,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING
-    },
-    fork: {
-      type: DataTypes.BOOLEAN,
-    },
-    stargazers_count: {
-      type: DataTypes.INTEGER
-    },
-    language: {
-      type: DataTypes.STRING
     }
-  }, {});
-  Repo.associate = function(models) {
-    Repo.belongsTo(models.User, {
+  });
+  Github.associate = function(models) {
+    Github.belongsTo(models.User, {
       foreignKey: 'userId',
       onDelete: 'CASCADE'
     })
   };
-  return Repo;
+  return Github;
 };
