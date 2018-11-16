@@ -175,6 +175,18 @@ module.exports = {
     linkedinAuth (req, res) {
         console.log(req.query.code);
         res.status(200).send('Hi')
+    },
+
+    userList (req, res) {
+        User.findAll()
+        .then(users => {
+            res.status(200).send(users.map(user =>  {
+                return {username: user.username, userId: user.id}
+            }))
+        })
+        .catch(err => {
+            res.status(400).send({err: err})
+        })
     }
 
 }
