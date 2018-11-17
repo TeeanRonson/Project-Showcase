@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'; 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'; 
 
-import Homepage from './components/homepage';
 import reducers from './reducers';
-
+import Homepage from './components/Homepage';
+import 'bootstrap/dist/css/bootstrap.css';
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
