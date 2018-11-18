@@ -1,5 +1,4 @@
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import './static/css/welcome.css';
 import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table.min.css';
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';

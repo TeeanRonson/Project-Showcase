@@ -5,6 +5,8 @@ const root_Url = "/api";
 const queryUser = "?id=";
 export const USER_LIST = 'user_list';
 export const USER = 'user';
+export const EXISTING_USER = 'existing_user';
+
 
 
 /**
@@ -30,3 +32,15 @@ export function getUser(id) {
       payload: request
   }
 }
+
+  /**
+   * Sign a user in 
+   */
+  export function signIn() {
+      const request = axios.post(`${root_Url}/login`);
+
+    return {
+        type: EXISTING_USER,
+        payload: request
+    }
+  }

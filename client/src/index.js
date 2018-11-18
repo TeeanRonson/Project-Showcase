@@ -8,7 +8,8 @@ import reducers from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
 import Homepage from './components/Homepage.js';
 import Userpage from './components/Userpage';
-import Reception from './components/Reception/Reception';
+import SignIn from './components/SignIn.js';
+import SignUp from './components/SignUp.js';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -18,9 +19,9 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route exact path="/user/:userid" component={Userpage}/>
-          <Route exact path="/reception" component={Reception}/>
+          <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/" component={Homepage}/>
-          
         </Switch>
       </div>
     </BrowserRouter>
