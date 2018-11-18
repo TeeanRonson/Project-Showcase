@@ -1,10 +1,14 @@
 import React from 'react';
-import Header from './Header';
 
-export default ({ children }) => {
-  return (
-    <div >
-      {children}
-    </div>
-  );
-};
+
+class App extends Component {
+
+    render() {
+
+      return (
+        <div className="App">
+        Hello World
+        </div>
+      )
+    }
+}

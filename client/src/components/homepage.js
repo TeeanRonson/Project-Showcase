@@ -8,20 +8,18 @@ import {connect} from 'react-redux';
 import {getAllUsers} from '../actions/index';
 
 class Homepage extends Component {
-  constructor() {
-    super();
-   
-    }
 
   componentDidMount() {
     this.props.getAllUsers();    
   }
 
   renderUsers() {
-    return _.map(this.props.posts, post => {
+    return _.map(this.props.posts, post => {   
       return (
           <li key={post.username} className="list-group-item"> 
-                {post.username}
+            <Link to={`user/${post.userId}`}>
+              {post.username}
+            </Link>     
           </li>
       );
   })
@@ -39,6 +37,8 @@ class Homepage extends Component {
 }
 
 function mapStateToProps(state) {
+  // console.log(state.posts);
   return {posts: state.posts};
 }
+
 export default connect(mapStateToProps, {getAllUsers})(Homepage);
